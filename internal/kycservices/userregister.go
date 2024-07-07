@@ -29,20 +29,21 @@ func (u *UserRegister) Register(ctx context.Context, creation *models.UserCreati
 	info := make(map[string]string)
 	for _, retriever := range u.infoRetriever {
 		iInfo := retriever.Retrieve(ctx, creation.CitizenID)
-		info = u.Merge(info, iInfo)
+		info = u.merge(info, iInfo)
 	}
 
 	status := userstatus.Allowed
 	if len(info) > 0 {
 		status = userstatus.Restricted
-	} else if len(info) > 1 {
+	}
+	if len(info) > 1 {
 		status = userstatus.Denied
 	}
 
 	return id, u.repository.UpdateStatus(ctx, id, status, info)
 }
 
-func (u *UserRegister) Merge(a map[string]string, b map[string]string) map[string]string {
+func (u *UserRegister) merge(a map[string]string, b map[string]string) map[string]string {
 	for key, value := range b {
 		a[key] = value
 	}

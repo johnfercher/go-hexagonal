@@ -8,9 +8,14 @@ components:
   drivens:          { in: internal/adapters/drivens/** }
   implementations:  { in: internal/kycservices } # customizable to each case
   api:              { in: cmd/api/** }
+  mocks:            { in: mocks/** }
+  fixture:          { in: internal/fixture/** }
+  internal:         { in: internal }
 
 vendors:
-  uuid: { in: github.com/google/uuid  }
+  assert: { in: github.com/stretchr/testify/assert }
+  mock:   { in: github.com/stretchr/testify/mock }
+  uuid:   { in: github.com/google/uuid  }
   chi:
     in:
       - github.com/go-chi/chi/v5
@@ -19,6 +24,11 @@ vendors:
 commonComponents:
   - consts
   - models
+  - mocks
+  - fixture
+
+commonVendors:
+  - uuid
 
 deps:
   models:
@@ -38,14 +48,15 @@ deps:
   drivens:
     mayDependOn:
       - ports
-    canUse:
-      - uuid
 
   implementations:
     mayDependOn:
       - ports
       - drivers
       - drivens
+      - implementations
+    canUse:
+      - assert
 
   api:
     mayDependOn:
@@ -56,3 +67,6 @@ deps:
     canUse:
       - chi
 
+  mocks:
+    canUse:
+      - mock

@@ -11,5 +11,3 @@
 | `make dod`      | (Definition of Done) Format files and check files | Same as `make build`, `make test`, `make fmt` and `make lint` | 
 | `make install`  | Install all dependencies                          | `go`, `curl` and `git`                                        |
 | `make mocks`    | Generate mocks                                    | `go` and `mockery`                                            |
-| `make docs`     | Run docsify docs server local                     | `docsify`                                                     |
-| `make godoc`    | Run godoc server local                            | `godoc`                                                       |
