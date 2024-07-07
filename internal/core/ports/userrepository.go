@@ -2,6 +2,7 @@ package ports
 
 import (
 	"context"
+
 	"github.com/johnfercher/go-hexagonal/internal/core/consts/userstatus"
 	"github.com/johnfercher/go-hexagonal/internal/core/models"
 )

@@ -4,8 +4,7 @@ import (
 	"context"
 )
 
-type PrisonRetriever struct {
-}
+type PrisonRetriever struct{}
 
 func (op *PrisonRetriever) Retrieve(ctx context.Context, citizenID string) map[string]string {
 	m := make(map[string]string)

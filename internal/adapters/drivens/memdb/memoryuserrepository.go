@@ -3,13 +3,16 @@ package memdb
 import (
 	"context"
 	"errors"
+
 	"github.com/google/uuid"
 	"github.com/johnfercher/go-hexagonal/internal/core/consts/userstatus"
 	"github.com/johnfercher/go-hexagonal/internal/core/models"
 )
 
-var ErrUserAlreadyCreated = errors.New("user already created")
-var ErrUserNotFound = errors.New("user not found")
+var (
+	ErrUserAlreadyCreated = errors.New("user already created")
+	ErrUserNotFound       = errors.New("user not found")
+)
 
 type UserRepository struct {
 	db map[string]*models.User

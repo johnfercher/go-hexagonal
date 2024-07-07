@@ -5,14 +5,13 @@ import (
 	"net/http"
 )
 
-type HttpTemplate struct {
+type HTTPTemplate struct{}
+
+func NewHTTPTemplate() *HTTPTemplate {
+	return &HTTPTemplate{}
 }
 
-func NewHttpTemplate() *HttpTemplate {
-	return &HttpTemplate{}
-}
-
-func (h *HttpTemplate) Write(w http.ResponseWriter, _return interface{}, httpStatus int) {
+func (h *HTTPTemplate) Write(w http.ResponseWriter, _return interface{}, httpStatus int) {
 	w.Header().Set("Content-Type", "application/json")
 
 	b, err := json.Marshal(_return)
@@ -25,7 +24,7 @@ func (h *HttpTemplate) Write(w http.ResponseWriter, _return interface{}, httpSta
 	_, _ = w.Write(b)
 }
 
-func (h *HttpTemplate) WriteError(w http.ResponseWriter, httpErr *Error) {
+func (h *HTTPTemplate) WriteError(w http.ResponseWriter, httpErr *Error) {
 	w.Header().Set("Content-Type", "application/json")
 
 	b, err := json.Marshal(httpErr)

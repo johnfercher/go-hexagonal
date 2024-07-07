@@ -1,0 +1,58 @@
+version: 3
+
+components:
+  consts:           { in: internal/core/consts/** }
+  models:           { in: internal/core/models/** }
+  ports:            { in: internal/core/ports/** }
+  drivers:          { in: internal/adapters/drivers/** }
+  drivens:          { in: internal/adapters/drivens/** }
+  implementations:  { in: internal/kycservices } # customizable to each case
+  api:              { in: cmd/api/** }
+
+vendors:
+  uuid: { in: github.com/google/uuid  }
+  chi:
+    in:
+      - github.com/go-chi/chi/v5
+      - github.com/go-chi/chi/v5/middleware
+
+commonComponents:
+  - consts
+  - models
+
+deps:
+  models:
+    mayDependOn:
+      - consts
+
+  ports:
+    mayDependOn:
+      - consts
+
+  drivers:
+    mayDependOn:
+      - ports
+      - drivens
+      - implementations
+
+  drivens:
+    mayDependOn:
+      - ports
+    canUse:
+      - uuid
+
+  implementations:
+    mayDependOn:
+      - ports
+      - drivers
+      - drivens
+
+  api:
+    mayDependOn:
+      - ports
+      - implementations
+      - drivers
+      - drivens
+    canUse:
+      - chi
+

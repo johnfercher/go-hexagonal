@@ -2,8 +2,9 @@ package httphandlers
 
 import (
 	"fmt"
-	"github.com/johnfercher/go-hexagonal/internal/adapters/drivens/memdb"
 	"net/http"
+
+	"github.com/johnfercher/go-hexagonal/internal/adapters/drivens/memdb"
 )
 
 type Error struct {
@@ -37,8 +38,10 @@ func (e Error) Error() string {
 	return fmt.Sprintf("%d %s %s", e.Status, e.Code, e.Inner.Error())
 }
 
-var ErrUnmarshallRequest = Err(http.StatusInternalServerError, "cannot_unmarshall")
-var ErrUnknown = Err(http.StatusInternalServerError, "unknown_error")
+var (
+	ErrUnmarshallRequest = Err(http.StatusInternalServerError, "cannot_unmarshall")
+	ErrUnknown           = Err(http.StatusInternalServerError, "unknown_error")
+)
 
 var mapErr = map[error]*Error{
 	memdb.ErrUserAlreadyCreated: Err(http.StatusBadRequest, memdb.ErrUserAlreadyCreated.Error()),

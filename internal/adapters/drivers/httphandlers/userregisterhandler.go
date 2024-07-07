@@ -2,32 +2,33 @@ package httphandlers
 
 import (
 	"encoding/json"
+	"net/http"
+
 	"github.com/johnfercher/go-hexagonal/internal/core/models"
 	"github.com/johnfercher/go-hexagonal/internal/core/ports"
-	"net/http"
 )
 
-type UserRegister struct {
-	template     *HttpTemplate
+type UserRegisterHandler struct {
+	template     *HTTPTemplate
 	userRegister ports.UserRegister
 }
 
-func NewUserRegister(userRegister ports.UserRegister) *UserRegister {
-	return &UserRegister{
-		template:     NewHttpTemplate(),
+func NewUserRegisterHandler(userRegister ports.UserRegister) *UserRegisterHandler {
+	return &UserRegisterHandler{
+		template:     NewHTTPTemplate(),
 		userRegister: userRegister,
 	}
 }
 
-func (u *UserRegister) Method() string {
+func (u *UserRegisterHandler) Method() string {
 	return http.MethodPost
 }
 
-func (u *UserRegister) Pattern() string {
+func (u *UserRegisterHandler) Pattern() string {
 	return "/users"
 }
 
-func (u *UserRegister) Func(w http.ResponseWriter, r *http.Request) {
+func (u *UserRegisterHandler) Func(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	userCreation := &UserCreationRequest{}

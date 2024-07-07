@@ -2,7 +2,7 @@ package httphandlers
 
 import "net/http"
 
-type HttpHandler interface {
+type HTTPHandler interface {
 	Method() string
 	Pattern() string
 	Func(w http.ResponseWriter, r *http.Request)
