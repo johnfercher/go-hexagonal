@@ -24,14 +24,14 @@ fmt:
 lint:
 	golangci-lint run --config=.golangci.yml ./...
 	make mock-lint
-	make mock-arch
+	make arch-lint
 
 .PHONY: mock-lint
 mock-lint:
 	bash shell/mock-check.sh
 
-.PHONY: mock-arch
-mock-arch:
+.PHONY: arch-lint
+arch-lint:
 	go-arch-lint check
 
 .PHONY: install

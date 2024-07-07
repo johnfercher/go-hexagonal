@@ -13,13 +13,11 @@ components:
   internal:         { in: internal }
 
 vendors:
-  assert: { in: github.com/stretchr/testify/assert }
-  mock:   { in: github.com/stretchr/testify/mock }
-  uuid:   { in: github.com/google/uuid  }
-  chi:
-    in:
-      - github.com/go-chi/chi/v5
-      - github.com/go-chi/chi/v5/middleware
+  assert:         { in: github.com/stretchr/testify/assert }
+  mock:           { in: github.com/stretchr/testify/mock }
+  uuid:           { in: github.com/google/uuid  }
+  chi:            { in: github.com/go-chi/chi/v5 }
+  chi-middleware: { in: github.com/go-chi/chi/v5/middleware }
 
 commonComponents:
   - consts
@@ -66,6 +64,7 @@ deps:
       - drivens
     canUse:
       - chi
+      - chi-middleware
 
   mocks:
     canUse:
