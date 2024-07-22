@@ -1,4 +1,4 @@
-package httphandlers
+package rest
 
 type UserCreationRequest struct {
 	CitizenID string   `json:"citizen_id"`

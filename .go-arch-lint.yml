@@ -1,15 +1,19 @@
 version: 3
 
+excludeFiles:
+  - "^.*_test\\.go$"
+  - "^.*\/test\/.*$"
+
 components:
   consts:           { in: internal/core/consts/** }
   models:           { in: internal/core/models/** }
   ports:            { in: internal/core/ports/** }
   drivers:          { in: internal/adapters/drivers/** }
   drivens:          { in: internal/adapters/drivens/** }
-  implementations:  { in: internal/kycservices } # customizable to each case
+  implementations:  { in: internal/services/** }
   api:              { in: cmd/api/** }
   mocks:            { in: mocks/** }
-  fixture:          { in: internal/fixture/** }
+  fixture:          { in: pkg/fixture/** }
   internal:         { in: internal }
 
 vendors:
@@ -52,7 +56,6 @@ deps:
       - ports
       - drivers
       - drivens
-      - implementations
     canUse:
       - assert
 

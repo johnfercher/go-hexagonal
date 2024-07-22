@@ -1,4 +1,4 @@
-package kycservices
+package services
 
 import (
 	"context"

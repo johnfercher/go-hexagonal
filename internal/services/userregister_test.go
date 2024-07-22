@@ -1,14 +1,15 @@
-package kycservices_test
+package services_test
 
 import (
 	"context"
 	"fmt"
 	"testing"
 
+	"github.com/johnfercher/go-hexagonal/pkg/fixture"
+
 	"github.com/google/uuid"
 	"github.com/johnfercher/go-hexagonal/internal/core/consts/userstatus"
-	"github.com/johnfercher/go-hexagonal/internal/fixture"
-	"github.com/johnfercher/go-hexagonal/internal/kycservices"
+	"github.com/johnfercher/go-hexagonal/internal/services"
 	"github.com/johnfercher/go-hexagonal/mocks"
 	"github.com/stretchr/testify/assert"
 )
@@ -16,11 +17,11 @@ import (
 func TestNewUserRegister(t *testing.T) {
 	t.Run("when create, then create correctly", func(t *testing.T) {
 		// Act
-		sut := kycservices.NewUserRegister(nil)
+		sut := services.NewUserRegister(nil)
 
 		// Assert
 		assert.NotNil(t, sut)
-		assert.Equal(t, "*kycservices.UserRegister", fmt.Sprintf("%T", sut))
+		assert.Equal(t, "*services.UserRegister", fmt.Sprintf("%T", sut))
 	})
 }
 
@@ -35,7 +36,7 @@ func TestUserRegister_Register(t *testing.T) {
 		repository := mocks.NewUserRepository(t)
 		repository.EXPECT().CreatePending(ctx, creation).Return("", errToReturn)
 
-		sut := kycservices.NewUserRegister(repository)
+		sut := services.NewUserRegister(repository)
 
 		// Act
 		id, err := sut.Register(ctx, creation)
@@ -64,7 +65,7 @@ func TestUserRegister_Register(t *testing.T) {
 		retriever2 := mocks.NewUserInfoRetriever(t)
 		retriever2.EXPECT().Retrieve(ctx, creation.CitizenID).Return(info2)
 
-		sut := kycservices.NewUserRegister(repository, retriever1, retriever2)
+		sut := services.NewUserRegister(repository, retriever1, retriever2)
 
 		// Act
 		id, err := sut.Register(ctx, creation)
@@ -92,7 +93,7 @@ func TestUserRegister_Register(t *testing.T) {
 		retriever2 := mocks.NewUserInfoRetriever(t)
 		retriever2.EXPECT().Retrieve(ctx, creation.CitizenID).Return(info2)
 
-		sut := kycservices.NewUserRegister(repository, retriever1, retriever2)
+		sut := services.NewUserRegister(repository, retriever1, retriever2)
 
 		// Act
 		id, err := sut.Register(ctx, creation)
@@ -120,7 +121,7 @@ func TestUserRegister_Register(t *testing.T) {
 		retriever2 := mocks.NewUserInfoRetriever(t)
 		retriever2.EXPECT().Retrieve(ctx, creation.CitizenID).Return(info2)
 
-		sut := kycservices.NewUserRegister(repository, retriever1, retriever2)
+		sut := services.NewUserRegister(repository, retriever1, retriever2)
 
 		// Act
 		id, err := sut.Register(ctx, creation)
@@ -148,7 +149,7 @@ func TestUserRegister_Register(t *testing.T) {
 		retriever2 := mocks.NewUserInfoRetriever(t)
 		retriever2.EXPECT().Retrieve(ctx, creation.CitizenID).Return(info2)
 
-		sut := kycservices.NewUserRegister(repository, retriever1, retriever2)
+		sut := services.NewUserRegister(repository, retriever1, retriever2)
 
 		// Act
 		id, err := sut.Register(ctx, creation)

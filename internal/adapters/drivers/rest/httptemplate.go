@@ -1,4 +1,4 @@
-package httphandlers
+package rest
 
 import (
 	"encoding/json"
